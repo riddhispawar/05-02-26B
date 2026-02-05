@@ -1,20 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Program for if statement</title>
-<script type="text/javascript">
-function display(no)
-{
-  if(no%2==0)
-    document.write("Number is Even")
-  else
-    document.write("Number is Odd")
-}
-</script>
+  <meta charset="UTF-8">
+  <title>Interactive Form Validation</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    .valid {
+      border: 2px solid green;
+    }
+    .invalid {
+      border: 2px solid red;
+    }
+  </style>
 </head>
-  <body>
-    <script type="text/javascript">
-      var no=prompt("Enter number",1)
-        display(no)
-    </script>
-  </body>
-          </html>
+<body>
+  <form id="signupForm">
+    <label>
+      Name:
+      <input type="text" id="name" required>
+      <span class="error" id="nameError"></span>
+    </label><br><br>
+
+    <label>
+      Email:
+      <input type="email" id="email" required>
+      <span class="error" id="emailError"></span>
+    </label><br><br>
+
+    <label>
+      Password:
+      <input type="password" id="password" required>
+      <span class="error" id="passwordError"></span>
+    </label><br><br>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
