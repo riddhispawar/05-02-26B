@@ -1,44 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Interactive Form Validation</title>
-  <style>
-    .error {
-      color: red;
-      font-size: 0.9em;
-    }
-    .valid {
-      border: 2px solid green;
-    }
-    .invalid {
-      border: 2px solid red;
-    }
-  </style>
-</head>
-<body>
-  <form id="signupForm">
-    <label>
-      Name:
-      <input type="text" id="name" required>
-      <span class="error" id="nameError"></span>
-    </label><br><br>
+// Grab form elements
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
-    <label>
-      Email:
-      <input type="email" id="email" required>
-      <span class="error" id="emailError"></span>
-    </label><br><br>
+// Validation functions
+function validateName() {
+  if (nameInput.value.trim().length < 3) {
+    console.log("❌ Name must be at least 3 characters.");
+    return false;
+  }
+  console.log("✅ Name looks good!");
+  return true;
+}
 
-    <label>
-      Password:
-      <input type="password" id="password" required>
-      <span class="error" id="passwordError"></span>
-    </label><br><br>
+function validateEmail() {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regex.test(emailInput.value)) {
+    console.log("❌ Invalid email format.");
+    return false;
+  }
+  console.log("✅ Email is valid!");
+  return true;
+}
 
-    <button type="submit">Sign Up</button>
-  </form>
+function validatePassword() {
+  if (passwordInput.value.length < 6) {
+    console.log("❌ Password must be at least 6 characters.");
+    return false;
+  }
+  console.log("✅ Password is strong enough!");
+  return true;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+// Attach validation to form submission
+document.getElementById("signupForm").addEventListener("submit", (e) => {
+  e.preventDefault(); // prevent actual submission
+  console.clear();    // clear console for fresh output
+  const validName = validateName();
+  const validEmail = validateEmail();
+  const validPassword = validatePassword();
+
+  if (validName && validEmail && validPassword) {
+    console.log("🎉 Form submitted successfully!");
+  } else {
+    console.log("⚠️ Please fix the errors above.");
+  }
+});
